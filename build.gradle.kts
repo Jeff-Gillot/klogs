@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.21"
+    kotlin("jvm") version "2.0.0"
     application
 }
 
-group = "org.example"
+group = "be.deltaflow"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -26,29 +26,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-}
-
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
 application {
     mainClass.set("be.delta.flow.klogs.MainKt")
 }
-
-//tasks.withType<Jar> {
-//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-//    manifest {
-//        attributes["Main-Class"] = application.mainClass.get()
-//    }
-//    configurations["compileClasspath"].forEach { file: File ->
-//        from(zipTree(file.absoluteFile))
-//    }
-//}
 
 tasks {
     val fatJar = register<Jar>("fatJar") {
